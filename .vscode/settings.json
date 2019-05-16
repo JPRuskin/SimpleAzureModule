@@ -1,0 +1,7 @@
+{
+    "powershell.scriptAnalysis.enable": true,
+    "powershell.codeFormatting.preset": "OTBS",
+    "powershell.codeFormatting.useCorrectCasing": true,
+    
+    "coverage-gutters.xmlname": "CodeCoverage.xml"
+}

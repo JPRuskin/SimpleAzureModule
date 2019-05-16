@@ -1,0 +1,39 @@
+{
+    "version": "2.0.0",
+    "presentation": {
+        "echo": false,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+    },
+    "args": [
+        "-NoProfile"
+    ],
+    "tasks": [
+        {
+            "command": "PowerShell.exe",
+            "label": "Build Module",
+            "isBackground": true,
+            "group": "build",
+            "args": [
+                "${workspaceRoot}\\build\\Build.ps1"
+            ]
+        },
+        {
+            "command": "PowerShell.exe",
+            "label": "Test Module",
+            "isBackground": true,
+            "group": "test",
+            "args": [
+                "Invoke-Pester",
+                "-Script '${workspaceRoot}\\tests\\'",
+                "-PesterOption @{IncludeVSCodeMarker=$true}",
+                "-CodeCoverage (Get-ChildItem -Path '${workspaceRoot}' -Filter *.psm1 -Recurse).FullName",
+                "-CodeCoverageOutputFile '${workspaceRoot}\\CodeCoverage.xml'"
+            ],
+            "problemMatcher": "$pester"
+        }
+    ]
+}

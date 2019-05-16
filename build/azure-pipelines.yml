@@ -1,0 +1,13 @@
+name: $($Build.DefinitionName)_$(Build.BuildNumber)
+
+jobs:
+  - job: Build
+    workspace:
+      clean: all
+    steps:
+    - checkout: self
+      clean: true
+      lfs: false
+
+    - powershell: $(Build.SourcesDirectory)/build/build.ps1 -NugetVersion $(Build.BuildNumber)
+      displayName: Build Module
